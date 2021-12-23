@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Input form</title>
+</h:head>
+
+<h:body>
+   <ui:composition>
+       <h:form id="input-form">
+           <br/>
+           <h:outputLabel for="x" value="Input X:"/>
+           <br/>
+           <h:selectOneMenu id="x" value="#{results.getFormPoint().x}" required="true" requiredMessage="Select X value">
+               <f:selectItem itemValue="-2"/>
+               <f:selectItem itemValue="-1.5" />
+               <f:selectItem itemValue="-1" />
+               <f:selectItem itemValue="-0.5" />
+               <f:selectItem itemValue="0" />
+               <f:selectItem itemValue="0.5" />
+               <f:selectItem itemValue="1" />
+               <f:validator validatorId="xValidator" />
+           </h:selectOneMenu>
+            <br/>
+           <span>
+               <h:outputLabel for="y" value="Input Y:"/>
+               <br/>
+               <h:inputText id="y" value="#{results.getFormPoint().y}" required="true" requiredMessage="Input Y value"
+                            styleClass="y-input" maxlength="12">
+                   <f:validator  validatorId="yValidator"/>
+               </h:inputText>
+           </span>
+           <br/>
+           <h:outputLabel for="r" value="Select R:"/>
+            <br/>
+<!--           <h:inputText id="r" value="#{results.getFormPoint().r}" required="true" requiredMessage="Select R value" readonly="true" styleClass="r-input">-->
+<!--                   <f:validator validatorId="rValidator" />-->
+<!--           </h:inputText>-->
+<!--            <br/>-->
+           <span>
+               <h:selectOneRadio id="r" value="#{results.getFormPoint().r}" required="true" onchange="changeR(value)" styleClass="r-radio">
+                   <f:selectItem itemValue="1" itemLabel="1"/>
+                   <f:selectItem itemValue="1.5" itemLabel="1.5"/>
+                   <f:selectItem itemValue="2" itemLabel="2"/>
+                   <f:selectItem itemValue="2.5" itemLabel="2.5"/>
+                   <f:selectItem itemValue="3" itemLabel="3"/>
+                   <f:validator validatorId="rValidator" />
+               </h:selectOneRadio>
+           </span>
+<!--           <h:commandButton value="1" onclick="changeR(value)" styleClass="r-button" />-->
+<!--           <h:commandButton value="1.5" onclick="changeR(value)" styleClass="r-button"/>-->
+<!--           <h:commandButton value="2" onclick="changeR(value)" styleClass="r-button"/>-->
+<!--           <h:commandButton value="2.5" onclick="changeR(value)" styleClass="r-button"/>-->
+<!--           <h:commandButton value="3" onclick="changeR(value)" styleClass="r-button"/>-->
+
+           <br/>
+           <h:panelGrid columns="2" styleClass="buttons-grid">
+               <h:commandButton id="submit-button" action="#{results.addFormPoint()}" value="Submit"
+                                styleClass="submit-button" validateClient="true" onclick="delayDrawPoints()">
+                   <f:ajax execute="@form" render="result-table msgs"/>
+               </h:commandButton>
+               <h:commandButton id="clear-button" value="Clear" action="#{results.clear()}"
+                                styleClass="clear-button" validateClient="false"
+                                onclick="setTimeout(() => {drawPlot()}, 500)">
+                   <f:ajax render="result-table msgs"/>
+               </h:commandButton>
+           </h:panelGrid>
+           <h:messages id="msgs"/>
+       </h:form>
+   </ui:composition>
+</h:body>
+
+</html>

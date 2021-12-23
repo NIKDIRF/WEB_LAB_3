@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<f:view>
+    <h:body>
+        <ui:composition template="templates/layout-template.xhtml">
+            <ui:define name="title">Web - Lab 3. Main page</ui:define>
+
+            <ui:define name="stylesheet">
+                <h:outputStylesheet library="css" name="main.css"/>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form id="hidden-form" style="display: none">
+                    <h:inputText styleClass="hidden-x" value="#{results.getPlotPoint().x}">
+                        <f:validator validatorId="xValidator"/>
+                    </h:inputText>
+                    <h:inputText styleClass="hidden-y" value="#{results.getPlotPoint().y}">
+                        <f:validator validatorId="yValidator"/>
+                    </h:inputText>
+                    <h:inputText styleClass="hidden-r" value="#{results.getPlotPoint().r}">
+                        <f:validator validatorId="rValidator"/>
+                    </h:inputText>
+                    <h:commandButton styleClass="hidden-button" action="#{results.addPlotPoint()}" validateClient="true">
+                        <f:ajax execute="@form" render="result-table msgs"/>
+                    </h:commandButton>
+                </h:form>
+                <canvas id="canvas"></canvas>
+                <ui:include src="templates/form.xhtml"/>
+            </ui:define>
+
+            <ui:define name="link">
+                <h:button outcome="index" value="To index page" styleClass="index-button"/>
+            </ui:define>
+
+            <ui:define name="results">
+                <h:dataTable id="result-table" var="p" value="#{results.points}">
+                    <h:column>
+                        <f:facet name="header">X</f:facet>
+                        <h:outputText value="#{p.x}" />
+                    </h:column>
+                    <h:column headerText="Y">
+                        <f:facet name="header">Y</f:facet>
+                        <h:outputText value="#{p.y}" />
+                    </h:column>
+                    <h:column headerText="R">
+                        <f:facet name="header">R</f:facet>
+                        <h:outputText value="#{p.r}" />
+                    </h:column>
+                    <h:column headerText="Result">
+                        <f:facet name="header">Result</f:facet>
+                        <h:outputText value="#{p.result}" />
+                    </h:column>
+                </h:dataTable>
+            </ui:define>
+
+            <ui:define name="scripts">
+                <h:outputScript library="js" name="jquery-3.6.0.min.js" />
+                <h:outputScript library="js" name="plot.js"/>
+                <h:outputScript library="js" name="validator.js"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
+</html>

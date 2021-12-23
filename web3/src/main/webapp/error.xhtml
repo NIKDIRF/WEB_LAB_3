@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<f:view>
+    <h:body>
+        <ui:composition template="templates/layout-template.xhtml">
+            <ui:define name="title">Web - Lab 3. Error page</ui:define>
+
+            <ui:define name="stylesheet">
+                <h:outputStylesheet library="css" name="error.css"/>
+            </ui:define>
+
+            <ui:define name="content">
+                <p class="text-error">
+                    <h:outputText id="error" value="#{flash.keep.errorMessage}" />
+                </p>
+            </ui:define>
+
+            <ui:define name="link">
+                <h:button outcome="index" value="To index page" styleClass="index-button"/>
+                <h:button outcome="main" value="To main page" styleClass="main-button"/>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</f:view>
+
+</html>
