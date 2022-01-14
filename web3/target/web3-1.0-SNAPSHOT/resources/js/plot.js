@@ -8,13 +8,13 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 });
 
-function changeR(r){
+function changeR(r) {
     _r = r;
     // $(".r-input").val(r.toString());
     drawPlot();
 }
 
-function drawPlot(){
+function drawPlot() {
     let canvas = document.getElementById("canvas"),
         ctx = canvas.getContext("2d"),
         dr = _r * 25;
@@ -67,14 +67,14 @@ function drawPlot(){
     drawPoints();
 }
 
-function drawPoints(){
-    $("#result-table tr").each(function (){
+function drawPoints() {
+    $("#result-table tr").each(function () {
         const point = $(this);
         const x = parseFloat(point.find("td:first-child").text());
         const y = parseFloat(point.find("td:nth-child(2)").text());
         const r = parseFloat(point.find("td:nth-child(3)").text());
         let res = false;
-        if (point.find("td:nth-child(4)").text() === "true"){
+        if (point.find("td:nth-child(4)").text() === "true") {
             res = true;
         }
         if (isNaN(x) || isNaN(y) || isNaN(r)) return;
@@ -82,10 +82,10 @@ function drawPoints(){
     })
 }
 
-function drawPoint(x, y, r, res){
+function drawPoint(x, y, r, res) {
     let canvas = document.getElementById("canvas"),
         ctx = canvas.getContext("2d");
-    if (res){
+    if (res) {
         ctx.fillStyle = "#00ff00";
         ctx.strokeStyle = "#008800";
     } else {
@@ -98,23 +98,35 @@ function drawPoint(x, y, r, res){
     ctx.stroke();
 }
 
-function handlePlotClick(canvas, e){
+function handlePlotClick(canvas, e) {
     const rect = canvas.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const clickY = e.clientY - rect.top;
     let x = (clickX - 150) / 25;
     let y = (150 - clickY) / 25;
     if (check(x, y, _r)) {
+        x = xToNormal(x)
         $(".hidden-x").val(x.toString().substr(0, 12));
         $(".hidden-y").val(y.toString().substr(0, 12));
         $(".hidden-r").val(_r.toString());
         $(".hidden-button").click();
-        delayDrawPoints();
+        setTimeout(() => drawPoints(), 400);
     }
 }
+const X_VALUES = [-2, -1.5, -1, -0.5, 0, 0.5, 1];
 
-function delayDrawPoints(){
-    setTimeout(() => drawPoints(), 500);
+function xToNormal(x) {
+    let min = Infinity;
+    for (let i = 0; i < X_VALUES.length; i++) {
+        if (Math.abs(x - X_VALUES[i]) < min) {
+            min = Math.abs(x - X_VALUES[i]);
+            numValueX = X_VALUES[i];
+        }
+    }
+    return numValueX;
+}
+function delayDrawPoints() {
+    setTimeout(() => drawPoints(), 1000);
 }
 
 function drawLine(ctx, begin, end, stroke = 'black', width = 1) {

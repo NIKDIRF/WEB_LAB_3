@@ -35,6 +35,7 @@ function checkY(y){
 }
 
 function checkR(r){
+    console.log(r)
     if (r === "") {
         alert("Select the R value")
         return false

@@ -3,10 +3,15 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>com.example.web3.model.Point</class>
         <properties>
+<!--            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>-->
+<!--            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>-->
+<!--            <property name="javax.persistence.jdbc.user" value="postgres"/>-->
+<!--            <property name="javax.persistence.jdbc.password" value="543308"/>-->
+<!--            <property name="eclipselink.ddl-generation" value="create-tables"/>-->
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
-            <property name="javax.persistence.jdbc.user" value="postgres"/>
-            <property name="javax.persistence.jdbc.password" value="543308"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://pg:5432/studs"/>
+            <property name="javax.persistence.jdbc.user" value="s313085"/>
+            <property name="javax.persistence.jdbc.password" value="ebn289"/>
             <property name="eclipselink.ddl-generation" value="create-tables"/>
         </properties>
     </persistence-unit>

@@ -1,0 +1,8 @@
+com\example\web3\validators\XValidator.class
+com\example\web3\model\AreaChecker.class
+com\example\web3\validators\RValidator.class
+com\example\web3\model\Results.class
+com\example\web3\model\PointAreaChecker.class
+com\example\web3\data\PSQLController.class
+com\example\web3\model\Point.class
+com\example\web3\validators\YValidator.class
